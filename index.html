@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ガチ中国語フレーズ500</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Sans+SC:wght@400;500;700;900&display=swap');
+
+:root {
+  --primary: #E91E63;
+  --primary-dark: #C2185B;
+  --primary-light: #FCE4EC;
+  --bg: #FAFAFA;
+  --card-bg: #FFFFFF;
+  --text: #212121;
+  --text-secondary: #757575;
+  --border: #E0E0E0;
+  --tag-bg: #F5F5F5;
+  --shadow: 0 2px 8px rgba(0,0,0,0.08);
+  --shadow-hover: 0 4px 16px rgba(0,0,0,0.12);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Noto Sans JP', 'Noto Sans SC', -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===== HEADER ===== */
+.header {
+  background: linear-gradient(135deg, var(--primary) 0%, #AD1457 100%);
+  color: #fff;
+  padding: 20px 16px 16px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(233,30,99,0.3);
+}
+
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+}
+
+.logo span {
+  font-size: 12px;
+  font-weight: 500;
+  opacity: 0.85;
+  display: block;
+  margin-top: 2px;
+}
+
+.stats {
+  text-align: right;
+  font-size: 13px;
+  opacity: 0.9;
+}
+
+.stats strong {
+  font-size: 22px;
+  font-weight: 900;
+}
+
+/* ===== SEARCH ===== */
+.search-wrap {
+  position: relative;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px 14px 10px 38px;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+  outline: none;
+  font-family: inherit;
+}
+
+.search-input::placeholder { color: rgba(255,255,255,0.6); }
+.search-input:focus { background: rgba(255,255,255,0.3); }
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.7;
+  font-size: 16px;
+}
+
+/* ===== GENRE TABS ===== */
+.genre-bar {
+  display: flex;
+  gap: 8px;
+  padding: 12px 16px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 96px;
+  z-index: 99;
+}
+
+.genre-bar::-webkit-scrollbar { display: none; }
+
+.genre-tab {
+  flex-shrink: 0;
+  padding: 7px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1.5px solid var(--border);
+  background: #fff;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.genre-tab:hover { border-color: var(--primary); color: var(--primary); }
+
+.genre-tab.active {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
+.genre-tab .count {
+  font-size: 11px;
+  opacity: 0.7;
+  margin-left: 4px;
+}
+
+/* ===== WORD LIST ===== */
+.word-list {
+  padding: 8px 12px 100px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.word-card {
+  background: var(--card-bg);
+  border-radius: 14px;
+  margin-bottom: 10px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+
+.word-card:hover { box-shadow: var(--shadow-hover); }
+
+/* Card Header (always visible) */
+.card-header {
+  display: flex;
+  align-items: center;
+  padding: 14px 16px;
+  cursor: pointer;
+  gap: 12px;
+  user-select: none;
+}
+
+.word-num {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--primary-light);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 900;
+  flex-shrink: 0;
+}
+
+.word-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.word-chinese {
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--text);
+  font-family: 'Noto Sans SC', sans-serif;
+  line-height: 1.3;
+}
+
+.word-pinyin {
+  font-size: 13px;
+  color: var(--primary);
+  font-weight: 500;
+  margin-top: 1px;
+}
+
+.word-japanese {
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+.card-toggle {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--tag-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.3s;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.word-card.open .card-toggle { transform: rotate(180deg); }
+
+/* Card Body (expandable) */
+.card-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+
+.card-body-inner {
+  padding: 0 16px 16px;
+}
+
+.genre-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  background: var(--primary-light);
+  color: var(--primary);
+  margin-bottom: 10px;
+}
+
+.explanation {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.7;
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  background: #FFF8E1;
+  border-radius: 8px;
+  border-left: 3px solid #FFC107;
+}
+
+.example-block {
+  margin-bottom: 8px;
+}
+
+.example-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.example-zh {
+  font-size: 16px;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.6;
+  margin-bottom: 2px;
+}
+
+.example-ja {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.divider {
+  border: none;
+  border-top: 1px dashed var(--border);
+  margin: 8px 0;
+}
+
+/* ===== LEVEL INDICATOR ===== */
+.level-strip {
+  width: 4px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 14px 0 0 14px;
+}
+
+.word-card { position: relative; }
+
+/* Genre colors */
+.genre-aizuchi .level-strip, .genre-aizuchi .word-num { background: #E91E63; }
+.genre-aizuchi .word-num { background: #FCE4EC; color: #E91E63; }
+
+.genre-nichijou .level-strip { background: #2196F3; }
+.genre-nichijou .word-num { background: #E3F2FD; color: #1565C0; }
+
+.genre-kanjou .level-strip { background: #FF9800; }
+.genre-kanjou .word-num { background: #FFF3E0; color: #E65100; }
+
+.genre-ningen .level-strip { background: #4CAF50; }
+.genre-ningen .word-num { background: #E8F5E9; color: #2E7D32; }
+
+.genre-sns .level-strip { background: #9C27B0; }
+.genre-sns .word-num { background: #F3E5F5; color: #7B1FA2; }
+
+.genre-shokuji .level-strip { background: #FF5722; }
+.genre-shokuji .word-num { background: #FBE9E7; color: #D84315; }
+
+.genre-ryokou .level-strip { background: #00BCD4; }
+.genre-ryokou .word-num { background: #E0F7FA; color: #00838F; }
+
+/* ===== EMPTY STATE ===== */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-secondary);
+}
+
+.empty-state .emoji { font-size: 48px; margin-bottom: 12px; }
+.empty-state p { font-size: 15px; }
+
+/* ===== SCROLL TOP ===== */
+.scroll-top {
+  position: fixed;
+  bottom: 24px;
+  right: 16px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  box-shadow: 0 4px 12px rgba(233,30,99,0.4);
+  cursor: pointer;
+  font-size: 20px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  transition: transform 0.2s;
+}
+
+.scroll-top:hover { transform: scale(1.1); }
+.scroll-top.visible { display: flex; }
+
+/* ===== RESPONSIVE ===== */
+@media (min-width: 768px) {
+  .header { padding: 24px 24px 20px; }
+  .genre-bar { padding: 14px 24px; }
+  .word-list { padding: 12px 24px 100px; }
+  .logo { font-size: 24px; }
+  .word-chinese { font-size: 22px; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-top">
+    <div class="logo">
+      ガチ中国語フレーズ500
+      <span>ネイティブが本当に使う実戦フレーズ集</span>
+    </div>
+    <div class="stats">
+      <strong id="displayCount">0</strong>
+      <div>フレーズ</div>
+    </div>
+  </div>
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input type="text" class="search-input" id="searchInput" placeholder="フレーズ・日本語・ピンインで検索...">
+  </div>
+</div>
+
+<div class="genre-bar" id="genreBar"></div>
+
+<div class="word-list" id="wordList"></div>
+
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+const CSV_URL = 'data.csv';
+
+const GENRE_MAP = {
+  'あいづち・リアクション': { class: 'genre-aizuchi', icon: '💬' },
+  '日常会話・雑談': { class: 'genre-nichijou', icon: '🗣️' },
+  '感情表現': { class: 'genre-kanjou', icon: '😤' },
+  '人間関係': { class: 'genre-ningen', icon: '🤝' },
+  'SNS・ネットスラング': { class: 'genre-sns', icon: '📱' },
+  '食事・飲み会': { class: 'genre-shokuji', icon: '🍜' },
+  '旅行・買い物': { class: 'genre-ryokou', icon: '✈️' },
+};
+
+let allWords = [];
+let currentGenre = 'all';
+let searchQuery = '';
+
+// Parse CSV properly (handle quoted fields)
+function parseCSVLine(line) {
+  const result = [];
+  let current = '';
+  let inQuotes = false;
+  for (let i = 0; i < line.length; i++) {
+    const ch = line[i];
+    if (ch === '"') {
+      inQuotes = !inQuotes;
+    } else if (ch === ',' && !inQuotes) {
+      result.push(current.trim());
+      current = '';
+    } else {
+      current += ch;
+    }
+  }
+  result.push(current.trim());
+  return result;
+}
+
+async function loadData() {
+  const resp = await fetch(CSV_URL);
+  const text = await resp.text();
+  const lines = text.split('\n').filter(l => l.trim());
+
+  // Skip header
+  for (let i = 1; i < lines.length; i++) {
+    const cols = parseCSVLine(lines[i]);
+    if (cols.length < 7) continue;
+
+    const [num, genre, word, pinyin, japanese, explanation, example] = cols;
+    if (!word || !genre || genre === 'ジャンル') continue;
+
+    // Split example into zh and ja parts
+    let exampleZh = '', exampleJa = '';
+    if (example) {
+      const parts = example.split('/ ');
+      if (parts.length >= 2) {
+        exampleZh = parts[0].trim();
+        exampleJa = parts.slice(1).join('/ ').trim();
+      } else {
+        exampleZh = example;
+      }
+    }
+
+    allWords.push({
+      num: parseInt(num) || i,
+      genre: genre.trim(),
+      word: word.trim(),
+      pinyin: pinyin.trim(),
+      japanese: japanese.trim(),
+      explanation: explanation.trim(),
+      exampleZh,
+      exampleJa,
+    });
+  }
+
+  renderGenreTabs();
+  renderWords();
+}
+
+function renderGenreTabs() {
+  const bar = document.getElementById('genreBar');
+  const genres = [...new Set(allWords.map(w => w.genre))];
+  const genreCounts = {};
+  genres.forEach(g => { genreCounts[g] = allWords.filter(w => w.genre === g).length; });
+
+  let html = `<button class="genre-tab active" data-genre="all" onclick="selectGenre('all', this)">すべて<span class="count">${allWords.length}</span></button>`;
+  genres.forEach(g => {
+    const info = GENRE_MAP[g] || { icon: '📖' };
+    html += `<button class="genre-tab" data-genre="${g}" onclick="selectGenre('${g}', this)">${info.icon} ${g}<span class="count">${genreCounts[g]}</span></button>`;
+  });
+  bar.innerHTML = html;
+}
+
+function selectGenre(genre, el) {
+  currentGenre = genre;
+  document.querySelectorAll('.genre-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  renderWords();
+}
+
+function getFilteredWords() {
+  let words = allWords;
+  if (currentGenre !== 'all') {
+    words = words.filter(w => w.genre === currentGenre);
+  }
+  if (searchQuery) {
+    const q = searchQuery.toLowerCase();
+    words = words.filter(w =>
+      w.word.toLowerCase().includes(q) ||
+      w.pinyin.toLowerCase().includes(q) ||
+      w.japanese.toLowerCase().includes(q) ||
+      w.explanation.toLowerCase().includes(q) ||
+      w.exampleZh.toLowerCase().includes(q) ||
+      w.exampleJa.toLowerCase().includes(q)
+    );
+  }
+  return words;
+}
+
+function renderWords() {
+  const words = getFilteredWords();
+  const list = document.getElementById('wordList');
+  document.getElementById('displayCount').textContent = words.length;
+
+  if (words.length === 0) {
+    list.innerHTML = `<div class="empty-state"><div class="emoji">🔍</div><p>該当するフレーズが見つかりません</p></div>`;
+    return;
+  }
+
+  let html = '';
+  words.forEach(w => {
+    const info = GENRE_MAP[w.genre] || { class: 'genre-nichijou' };
+    html += `
+      <div class="word-card ${info.class}" onclick="toggleCard(this)">
+        <div class="level-strip"></div>
+        <div class="card-header">
+          <div class="word-num">${String(w.num).padStart(3, '0')}</div>
+          <div class="word-main">
+            <div class="word-chinese">${escapeHtml(w.word)}</div>
+            <div class="word-pinyin">${escapeHtml(w.pinyin)}</div>
+            <div class="word-japanese">${escapeHtml(w.japanese)}</div>
+          </div>
+          <div class="card-toggle">▼</div>
+        </div>
+        <div class="card-body">
+          <div class="card-body-inner">
+            <div class="genre-badge">${info.icon || ''} ${escapeHtml(w.genre)}</div>
+            ${w.explanation ? `<div class="explanation">${escapeHtml(w.explanation)}</div>` : ''}
+            ${w.exampleZh ? `
+              <div class="example-block">
+                <div class="example-label">例文</div>
+                <div class="example-zh">${escapeHtml(w.exampleZh)}</div>
+                ${w.exampleJa ? `<div class="example-ja">${escapeHtml(w.exampleJa)}</div>` : ''}
+              </div>
+            ` : ''}
+          </div>
+        </div>
+      </div>
+    `;
+  });
+
+  list.innerHTML = html;
+}
+
+function toggleCard(card) {
+  const body = card.querySelector('.card-body');
+  if (card.classList.contains('open')) {
+    card.classList.remove('open');
+    body.style.maxHeight = '0';
+  } else {
+    card.classList.add('open');
+    body.style.maxHeight = body.scrollHeight + 'px';
+  }
+}
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// Search
+let searchTimer;
+document.getElementById('searchInput').addEventListener('input', function(e) {
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(() => {
+    searchQuery = e.target.value.trim();
+    renderWords();
+  }, 200);
+});
+
+// Scroll to top button
+window.addEventListener('scroll', () => {
+  const btn = document.getElementById('scrollTop');
+  btn.classList.toggle('visible', window.scrollY > 400);
+});
+
+// Load
+loadData();
+</script>
+
+</body>
+</html>
