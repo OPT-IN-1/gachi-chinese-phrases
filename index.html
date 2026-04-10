@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ガチ中国語フレーズ500</title>
+<title>ガチ中国語単語500</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Sans+SC:wght@400;500;700;900&display=swap');
 
@@ -382,17 +382,17 @@ body {
 <div class="header">
   <div class="header-top">
     <div class="logo">
-      ガチ中国語フレーズ500
-      <span>ネイティブが本当に使う実戦フレーズ集</span>
+      ガチ中国語単語500
+      <span>ネイティブが本当に使う実戦単語集</span>
     </div>
     <div class="stats">
       <strong id="displayCount">0</strong>
-      <div>フレーズ</div>
+      <div>単語</div>
     </div>
   </div>
   <div class="search-wrap">
     <span class="search-icon">🔍</span>
-    <input type="text" class="search-input" id="searchInput" placeholder="フレーズ・日本語・ピンインで検索...">
+    <input type="text" class="search-input" id="searchInput" placeholder="単語・日本語・ピンインで検索...">
   </div>
 </div>
 
@@ -526,7 +526,7 @@ function renderWords() {
   document.getElementById('displayCount').textContent = words.length;
 
   if (words.length === 0) {
-    list.innerHTML = `<div class="empty-state"><div class="emoji">🔍</div><p>該当するフレーズが見つかりません</p></div>`;
+    list.innerHTML = `<div class="empty-state"><div class="emoji">🔍</div><p>該当する単語が見つかりません</p></div>`;
     return;
   }
 
