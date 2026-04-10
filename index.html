@@ -375,11 +375,12 @@ body {
 }
 
 .header-panda {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid rgba(255,255,255,0.5);
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  object-fit: contain;
+  background: rgba(255,255,255,0.9);
+  padding: 4px;
   flex-shrink: 0;
 }
 
@@ -428,7 +429,7 @@ body {
 <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
 <script>
-const CSV_URL = 'data.csv';
+const CSV_URL = 'data.csv?v=' + Date.now();
 
 const GENRE_MAP = {
   'あいづち・リアクション': { class: 'genre-aizuchi', icon: '💬' },
