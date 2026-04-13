@@ -344,35 +344,41 @@ body {
 .empty-state p { font-size: 15px; }
 
 /* ===== AUDIO BUTTONS ===== */
-.audio-row {
+.word-chinese-row {
   display: flex;
+  align-items: center;
   gap: 8px;
-  margin-bottom: 12px;
 }
 
-.audio-btn {
-  display: inline-flex;
+.example-label-row {
+  display: flex;
   align-items: center;
   gap: 6px;
-  padding: 6px 14px;
-  border-radius: 20px;
+  margin-bottom: 4px;
+}
+
+.audio-btn-mini {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
   border: 1.5px solid var(--primary);
   background: #fff;
   color: var(--primary);
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 14px;
   cursor: pointer;
   transition: all 0.2s;
-  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 0;
+  line-height: 1;
 }
 
-.audio-btn:hover, .audio-btn.playing {
+.audio-btn-mini:hover, .audio-btn-mini.playing {
   background: var(--primary);
-  color: #fff;
-}
-
-.audio-btn .icon {
-  font-size: 15px;
+  filter: brightness(1.2);
+  transform: scale(1.1);
 }
 
 /* ===== SCROLL TOP ===== */
@@ -597,7 +603,10 @@ function renderWords() {
         <div class="card-header">
           <div class="word-num">${String(w.num).padStart(3, '0')}</div>
           <div class="word-main">
-            <div class="word-chinese">${escapeHtml(w.word)}</div>
+            <div class="word-chinese-row">
+              <div class="word-chinese">${escapeHtml(w.word)}</div>
+              <button class="audio-btn-mini" onclick="event.stopPropagation(); playAudio(${w.num}, '単語', this)" title="単語を再生">🔊</button>
+            </div>
             <div class="word-pinyin">${escapeHtml(w.pinyin)}</div>
             <div class="word-japanese">${escapeHtml(w.japanese)}</div>
           </div>
@@ -606,14 +615,13 @@ function renderWords() {
         <div class="card-body">
           <div class="card-body-inner">
             <div class="genre-badge">${info.icon || ''} ${escapeHtml(w.genre)}</div>
-            <div class="audio-row">
-              <button class="audio-btn" onclick="event.stopPropagation(); playAudio(${w.num}, '単語', this)"><span class="icon">🔊</span> 単語</button>
-              <button class="audio-btn" onclick="event.stopPropagation(); playAudio(${w.num}, '例文', this)"><span class="icon">🔊</span> 例文</button>
-            </div>
             ${w.explanation ? `<div class="explanation">${escapeHtml(w.explanation)}</div>` : ''}
             ${w.exampleZh ? `
               <div class="example-block">
-                <div class="example-label">例文</div>
+                <div class="example-label-row">
+                  <div class="example-label">例文</div>
+                  <button class="audio-btn-mini" onclick="event.stopPropagation(); playAudio(${w.num}, '例文', this)" title="例文を再生">🔊</button>
+                </div>
                 <div class="example-zh">${escapeHtml(w.exampleZh)}</div>
                 ${w.exampleJa ? `<div class="example-ja">${escapeHtml(w.exampleJa)}</div>` : ''}
               </div>
